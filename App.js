@@ -4,23 +4,32 @@ import {
   Text,
   View,
 } from 'react-native'
-
+import { ApolloProvider } from 'react-apollo';
+import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-boost';
+import Events from './screens/Events';
+const client = new ApolloClient({
+  link: new HttpLink({ uri: 'http://186.96.211.174:8000/___graphql' }),
+  cache: new InMemoryCache()
+});
 
 export default function App() {
-  
-  
-    return (
-      <View style={styles.container}>
-      <Text>Test App</Text>
-    </View>
-    )
-  
+
+
+  return (
+    <ApolloProvider client={client}>
+      {/* <View style={styles.container}> */}
+        <Events />
+      {/* </View> */}
+    </ApolloProvider>
+  )
+
 };
 
 const styles = StyleSheet.create({
   container: {
+    margin:10,
     flex: 1,
-    alignItems:"center",
-    justifyContent:"center"
+    alignItems: "center",
+    justifyContent: "center"
   },
 });
