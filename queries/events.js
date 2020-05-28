@@ -1,5 +1,3 @@
-import React from 'react';
-import { View,Text } from 'react-native';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import PrideTTEvent from '../models/events';
@@ -11,6 +9,7 @@ const Events_Query = gql`
                 id
                 title
                 content
+                image
               }
             }
         }
