@@ -7,6 +7,7 @@ import {
 import { ApolloProvider } from 'react-apollo';
 import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-boost';
 import Events from './screens/Events';
+import Home from './screens/Home';
 const client = new ApolloClient({
   link: new HttpLink({ uri: 'http://186.96.211.174:8000/___graphql' }),
   cache: new InMemoryCache()
@@ -17,8 +18,9 @@ export default function App() {
 
   return (
     <ApolloProvider client={client}>
+      <Home/>
       {/* <View style={styles.container}> */}
-        <Events />
+        {/* <Events /> */}
       {/* </View> */}
     </ApolloProvider>
   )
