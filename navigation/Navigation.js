@@ -125,7 +125,7 @@ export const UpdatesNavigator = (props) => {
 export const WellnessNavigator = (props) => {
   return (
     <WellnessStackNavigator.Navigator>
-      <WellnesstackNavigator.Screen
+      <WellnessStackNavigator.Screen
         name="Wellness"
         component={Wellness}
         options={{ headerShown: false }}
