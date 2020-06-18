@@ -11,15 +11,7 @@ const Tab = createBottomTabNavigator();
 const HomeStackNavigator=createStackNavigator();
 const EventsStackNavigator = createStackNavigator();
 const MainStackNavigator = createStackNavigator();
-// export const MainNavigator=props=>{
-//   return <MainStackNavigator.Navigator>
-//     <MainStackNavigator.Screen name='Home' component={HomeNavigator} options={{
-//     headerShown: false
-//   }}/>
-//     <MainStackNavigator.Screen name='Events' component={EventsNavigator} options={{
-//     headerShown: true}}/>
-//   </MainStackNavigator.Navigator>
-// }
+
 export const HomeNavigator=props=>{
   return <HomeStackNavigator.Navigator >
     <HomeStackNavigator.Screen
@@ -29,6 +21,7 @@ export const HomeNavigator=props=>{
       headerShown: false
     }}
     />
+    <HomeStackNavigator.Screen name='Allies' component={AlliesNavigator} options={EventsScreenOptions}/>
     <HomeStackNavigator.Screen name='Events' component={EventsNavigator} options={EventsScreenOptions}/>
   </HomeStackNavigator.Navigator>
 }

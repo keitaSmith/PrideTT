@@ -1,9 +1,13 @@
 import React, { useState, useCallback } from 'react';
 import { View, StyleSheet, FlatList, Text, SafeAreaView, Dimensions } from 'react-native';
+import { useApolloClient } from '@apollo/react-hooks';
 import AllEvents from '../queries/AllEvents';
 import PrideTTLogo from '../assets/svgs/PrideTTLogo.svg';
 import EventItem from '../components/EventItem';
+import Favorite_Events_Query from '../queries/localQueries/FavoriteEvents';
 const Events = props => {
+    const client = useApolloClient();
+    //console.log(client.cache.data.events);
     const allEvents = AllEvents();
     const [newDate, setNewDate] = useState('');
 
@@ -49,6 +53,14 @@ const Events = props => {
                             start={itemData.item.readableStart}
                             end={itemData.item.readableEnd}
                             imgUrl={itemData.item.imgUrl}
+                            favEvent={()=>{
+                                // client.writeData({
+                                //     data:{
+                                //         events:client.data.events.concat(itemData.item)
+                                //     }
+                                // });
+                                console.log(client.cache.data);
+                            }}
                         />
                     </View>
 

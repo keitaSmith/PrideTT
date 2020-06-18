@@ -23,7 +23,7 @@ const EventItem = props => {
                        <Text style={styles.description}>{props.start} - {props.end}</Text>
                     </View>
                     <View style={styles.favorite}> 
-                            <TouchableCmp onPress={()=>{}} style={styles.actions}>
+                            <TouchableCmp onPress={props.favEvent} style={styles.actions}>
                                 <View style={styles.circle}>
                                     <Ionicons
                                         name={Platform.OS === 'android' ? 'md-heart' : 'ios-heart'}

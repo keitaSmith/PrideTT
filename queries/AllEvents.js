@@ -1,8 +1,9 @@
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery,useMutation } from '@apollo/react-hooks';
 import PrideTTEvent from '../models/event';
 import moment from 'moment';
-const All_Events_Query = gql`
+
+export const All_Events_Query = gql`
 {
     allStrapiEvent{
       edges {
