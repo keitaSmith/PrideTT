@@ -4,21 +4,13 @@ import PrideTTRecentEvent from '../models/recentEvent';
 import moment from 'moment';
 const Recent_Events_Query = gql`
 {
-    allStrapiEvent(limit: 5) {
-      edges {
-        node {
-          id
-          title
-          start_time
-          end_time
-          image {
-            childImageSharp {
-              original {
-                src
-              }
-            }
-          }
-        }
+    events{
+      id
+      title
+      start_time
+      end_time
+      image{
+        url
       }
     }
   }
@@ -30,19 +22,18 @@ const RecentEvents = props => {
     const pridettRecentEvents = [];
         if (error) return "error";
         if (loading) return "loading";
-
-        data.allStrapiEvent.edges.forEach(({ node }) =>{
+        data.events.forEach(event =>{
           let end;
-          if(node.end_time){
-            end=new Date(node.end_time)
+          if(event.end_time){
+            end=new Date(event.end_time)
           }else{
-            end = new Date(node.start_time);
+            end = new Date(event.start_time);
             end.setHours( end.getHours() + 1 );
           }
           const now = new Date();
 
           if(end>now){
-            pridettRecentEvents.push(new PrideTTRecentEvent(node.id,node.title,node.image.childImageSharp.original.src));
+            pridettRecentEvents.push(new PrideTTRecentEvent(event.id,event.title,event.image.url));
           }
         });
         return pridettRecentEvents;

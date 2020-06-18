@@ -4,7 +4,7 @@ class PrideTTEvent{
         this.id = id;
         this.title = title;
         this.content = content;
-        this.imgUrl = {uri:'http://186.96.211.174:8000' + imgUrl};
+        this.imgUrl = {uri:'http://186.96.211.174:1337' + imgUrl};
         this.start_time = new Date(start_time);
         this.end_time = new Date(end_time);
         this.new_date=new_date;

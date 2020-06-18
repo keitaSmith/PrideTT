@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
         marginVertical:5
     },
     dateContainer:{
+        paddingTop:10,
         paddingLeft:10,
         marginHorizontal:10
     },
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
         //paddingHorizontal: 10
     },
     mainText: {
-        //fontFamily: 'open-sans-bold',
+        paddingRight:20,
         fontSize: 16,
     },
 
