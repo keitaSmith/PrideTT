@@ -11,7 +11,7 @@ import Events from './screens/Events';
 import Home from './screens/Home';
 import AppNavigator from './navigation/NavigationContainer';
 const client = new ApolloClient({
-  link: new HttpLink({ uri: 'http://186.96.211.174:8000/___graphql' }),
+  link: new HttpLink({ uri: 'http://186.96.211.174:1337/graphql' }),
   cache: new InMemoryCache()
 });
 

@@ -12,15 +12,6 @@ import PrideTTLogo from "../assets/svgs/PrideTTLogo.svg";
 import EventItem from "../components/EventItem";
 const Events = (props) => {
   const allEvents = AllEvents();
-  const [newDate, setNewDate] = useState("");
-
-  const isNewDate = useCallback(
-    (props) => {
-      if (props.date != newDate) setNewDate(false);
-      else setNewDate(true);
-    },
-    [newDate]
-  );
 
   if (allEvents === "error") {
     return (
@@ -37,12 +28,6 @@ const Events = (props) => {
     );
   }
   return (
-    // <View style={styles.container}>
-    //     <PrideTTLogo
-    //     height={0.35*Dimensions.get('window').height}
-    //     width={0.35*Dimensions.get('window').width}
-    //     />
-    // </View>
     <SafeAreaView style={styles.container}>
       <FlatList
         data={allEvents}
