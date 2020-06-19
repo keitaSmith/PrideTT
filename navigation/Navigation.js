@@ -3,13 +3,14 @@ import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
 import Home from "../screens/Home";
 import Events from "../screens/Events";
 import Allies from "../screens/Allies";
 import Media from "../screens/Media";
 import Updates from "../screens/Updates";
 import Wellness from "../screens/Wellness";
+import DonationScreen from "../screens/DonationScreen";
 import { EventsScreenOptions } from "../screens/Events";
 import { AlliesScreenOptions } from "../screens/Allies";
 import { MediaScreenOptions } from "../screens/Media";
@@ -141,15 +142,18 @@ export const HomeTabNavigator = (props) => {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-
+          let IconType;
           if (route.name === "Home") {
+            IconType = MaterialIcons;
             iconName = "home";
           } else if (route.name === "Saved Events") {
+            IconType = MaterialIcons;
             iconName = "event";
+          } else if (route.name === "Contribute") {
+            IconType = FontAwesome5;
+            iconName = "hand-holding";
           }
-
-          // You can return any component that you like here!
-          return <MaterialIcons name={iconName} size={size} color={color} />;
+        return <IconType name={iconName} size={size} color={color} />;
         },
       })}
       tabBarOptions={{
@@ -159,6 +163,7 @@ export const HomeTabNavigator = (props) => {
     >
       <Tab.Screen name="Home" component={HomeNavigator} />
       <Tab.Screen name="Saved Events" component={Events} />
+      <Tab.Screen name="Contribute" component={DonationScreen} />
     </Tab.Navigator>
   );
 };
