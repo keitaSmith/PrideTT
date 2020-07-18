@@ -11,11 +11,10 @@
       ]
     },
     "name": "PrideTT",
-    "slug": "PrideTT",
+    "slug": "pridett",
     "platforms": [
       "ios",
-      "android",
-      "web"
+      "android"     
     ],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -33,6 +32,12 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android":{
+      "adaptiveIcon":{
+        "backgroundColor": "#ffffff",
+        "foregroundImage":"./assets/icon-adaptive.png"
+      }
     }
   }
 }

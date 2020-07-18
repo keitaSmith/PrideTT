@@ -11,13 +11,17 @@ import Media from "../screens/Media";
 import Updates from "../screens/Updates";
 import Wellness from "../screens/Wellness";
 import DonationScreen from "../screens/DonationScreen";
+import EventDetailsScreen from '../screens/EventDetailsScreen';
+import EventRegistrationScreen from '../screens/EventRegistrationScreen';
 import { EventsScreenOptions } from "../screens/Events";
 import { AlliesScreenOptions } from "../screens/Allies";
 import { MediaScreenOptions } from "../screens/Media";
 import { UpdatesScreenOptions } from "../screens/Updates";
 import { WellnessScreenOptions } from "../screens/Wellness";
+import { EventDetailsScreenOptions } from '../screens/EventDetailsScreen';
 const Tab = createBottomTabNavigator();
 const HomeStackNavigator = createStackNavigator();
+const UpcomingEventsStackNavigator = createStackNavigator();
 const EventsStackNavigator = createStackNavigator();
 const MainStackNavigator = createStackNavigator();
 const AlliesStackNavigator = createStackNavigator();
@@ -38,15 +42,40 @@ export const HomeNavigator = (props) => {
     <HomeStackNavigator.Navigator>
       <HomeStackNavigator.Screen
         name="Home"
-        component={Home}
+        component={EventsNavigator}
         options={{
           headerShown: false,
         }}
       />
+       <HomeStackNavigator.Screen
+        name="Upcoming Events"
+        component={EventDetailsScreen}
+          options={{
+            headerShown: true,
+            headerTransparent: true,
+            headerTitle: '',
+            headerBackTitleStyle: {
+              color: 'white'
+            },
+            headerTintColor: 'white',
+  
+          }
+          } 
+      /> 
       <HomeStackNavigator.Screen
-        name="Events"
-        component={EventsNavigator}
-        options={EventsScreenOptions}
+        name="Event Registration"
+        component={EventRegistrationScreen}
+          options={{
+            headerShown: true,
+            //headerTransparent: true,
+            headerTitle: 'Registration Form',
+            // headerBackTitleStyle: {
+            //   color: 'bla'
+            // },
+            //headerTintColor: 'black',
+  
+          }
+          } 
       />
       <HomeStackNavigator.Screen
         name="Allies"
@@ -73,17 +102,61 @@ export const HomeNavigator = (props) => {
 };
 export const EventsNavigator = (props) => {
   return (
-    <EventsStackNavigator.Navigator>
+    <EventsStackNavigator.Navigator
+      screenOptions={{ headerShown: false }}
+    >
+      <EventsStackNavigator.Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerShown: false,
+        }}
+      />
       <EventsStackNavigator.Screen
         name="Events"
         component={Events}
-        options={{ headerShown: false }}
+        options={{ headerShown: true,
+          //headerTransparent:true,
+          headerBackTitleStyle:{
+            color:'pruple'
+          },
+          //headerTintColor:'purple',
+          headerStyle:{
+            backgroundColor:'white'
+          }
+          //headerTransparent: true,
+         }}
       />
-      {/* <EventsStackNavigator.Screen name="EventDetail" component={EventDetails} /> */}
+      <EventsStackNavigator.Screen
+        name="EventDetails"
+        component={EventDetailsScreen}
+        options={{
+          headerShown: true,
+          headerTransparent: true,
+          headerTitle: '',
+          headerBackTitleStyle: {
+            color: 'white'
+          },
+          headerTintColor: 'white',
+
+        }
+        }
+      />
     </EventsStackNavigator.Navigator>
   );
 };
-
+export const UpcomingEventsNavigator = (props) => {
+  return (
+    <UpcomingEventsStackNavigator.Navigator>
+      <UpcomingEventsStackNavigator.Screen
+        name="Event Details"
+        component={EventDetailsScreen}
+        options={{ headerShown: false }}
+      />
+      {/* <EventsStackNavigator.Screen name="EventDetail" component={EventDetails} /> */}
+    </UpcomingEventsStackNavigator.Navigator>
+  );
+};
 export const AlliesNavigator = (props) => {
   return (
     <AlliesStackNavigator.Navigator>
@@ -118,7 +191,6 @@ export const UpdatesNavigator = (props) => {
         component={Updates}
         options={{ headerShown: false }}
       />
-      {/* <EventsStackNavigator.Screen name="EventDetail" component={EventDetails} /> */}
     </UpdatesStackNavigator.Navigator>
   );
 };
@@ -153,16 +225,19 @@ export const HomeTabNavigator = (props) => {
             IconType = FontAwesome5;
             iconName = "hand-holding";
           }
-        return <IconType name={iconName} size={size} color={color} />;
+          return <IconType name={iconName} size={size} color={color} />;
         },
       })}
       tabBarOptions={{
-        activeTintColor: "tomato",
+        tabStyle: {
+          backgroundColor: 'white'
+        },
+        activeTintColor: "#fa2f88",
         inactiveTintColor: "gray",
       }}
     >
       <Tab.Screen name="Home" component={HomeNavigator} />
-      <Tab.Screen name="Saved Events" component={Events} />
+      {/* <Tab.Screen name="Saved Events" component={Events} /> */}
       <Tab.Screen name="Contribute" component={DonationScreen} />
     </Tab.Navigator>
   );

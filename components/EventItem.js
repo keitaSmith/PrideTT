@@ -6,45 +6,65 @@ const EventItem = props => {
     if (Platform.OS === 'android' && Platform.Version >= 21) {
         TouchableCmp = TouchableNativeFeedback;
     }
-    return(
+    return (
         <View>
-        {props.newDate? (<View style={styles.dateContainer}>
-            <Text style={styles.date}>{props.new_date}</Text>
-        </View>):null}
-            <View style={styles.eventItem}>
+            {props.newDate ? (<View style={styles.dateContainer}>
+                <Text style={styles.date}>{props.new_date}</Text>
+            </View>) : null}
+            <TouchableCmp onPress={props.onViewDetail}>
+                <View style={styles.eventItem}>
 
-                <View style={styles.imageContainer}>
-                    <Image style={styles.image} source={props.imgUrl} />
-                </View>
-                <View style={styles.details}>
-                    <View style={styles.itemData}>
-                        <Text style={styles.mainText}>{props.title}</Text>
-
-                       <Text style={styles.description}>{props.start} - {props.end}</Text>
+                    <View style={styles.imageContainer}>
+                        <Image style={styles.image} source={props.imgUrl} />
                     </View>
-                    <View style={styles.favorite}> 
-                            <TouchableCmp onPress={props.favEvent} style={styles.actions}>
+                    <View style={styles.details}>
+                        <Text style={styles.mainText} numberOfLines={1}>{props.title}</Text>
+                        <View style={styles.itemData}>
+                            <View style={styles.timeContainer}>
+                                <Ionicons
+                                    name={Platform.OS === 'android' ? 'md-time' : 'ios-time'}
+                                    size={18}
+                                    color="pink"
+                                />
+                                <Text style={styles.dateTime}> {props.start} - {props.end}</Text>
+                            </View>
+                            <View style={styles.locationContainer}>
+                                <Ionicons
+                                    name={Platform.OS === 'android' ? 'md-pin' : 'ios-pin'}
+                                    size={18}
+                                    color="pink"
+                                />
+                                <Text style={styles.dateTime} numberOfLines={1}> {props.location}</Text>
+                            </View>
+
+                        </View>
+                        
+                        <View style={styles.favorite}>
+                            {props.category? <View style={styles.category}><Text style={styles.categoryText}>{props.category}</Text></View>:<View><Text> </Text></View>}
+                            {/* <View style={styles.circle}>
+                             <TouchableCmp onPress={props.onFavoriteEvent} style={styles.actions}>
                                 <View style={styles.circle}>
                                     <Ionicons
                                         name={Platform.OS === 'android' ? 'md-heart' : 'ios-heart'}
                                         size={28}
-                                        color='pink'
+                                        color={props.favorite?'red':'pink'}
                                     />
                                 </View>
-                            </TouchableCmp>
-                        </View>
-                </View>   
-                 
+                            </TouchableCmp> 
+                            </View> */}
+                        </View >
+                    
+                    </View>
                 </View>
-            </View>
-        );
+            </TouchableCmp>
+        </View>
+    );
 }
 const styles = StyleSheet.create({
     eventItem: {
         paddingVertical: 10,
         paddingHorizontal: 10,
-        height: 120,
-        justifyContent: "space-between",
+        height: 125,
         flexDirection: "row",
         // overflow: 'hidden',
         // shadowColor: 'black',
@@ -55,23 +75,33 @@ const styles = StyleSheet.create({
         //borderRadius: 10,
         backgroundColor: 'white',
         overflow: "hidden",
-        marginVertical:5
+        marginVertical: 5
     },
-    dateContainer:{
-        paddingTop:10,
-        paddingLeft:10,
-        marginHorizontal:10
+    dateContainer: {
+        paddingTop: 10,
+        paddingLeft: 10,
+        marginHorizontal: 10
     },
-    favorite:{
-        flexDirection:"row",
-        paddingRight:50,
-        alignSelf:"flex-end"
+    timeContainer: {
+        flexDirection: "row"
     },
-    date:{
-        justifyContent:"center"
+    locationContainer: {
+        flexDirection: "row",
+        paddingLeft:2
+    },
+    favorite: {
+        flexDirection: "row",
+        //paddingRight: 40,
+        marginTop:16,
+        justifyContent: "space-between",
+        
+    },
+    date: {
+        fontWeight:"bold",
+        justifyContent: "center"
     },
     itemData: {
-        justifyContent: "flex-start",
+        justifyContent: "space-between",
     },
     quantity: {
         //fontFamily: 'open-sans',
@@ -80,8 +110,9 @@ const styles = StyleSheet.create({
         //paddingHorizontal: 10
     },
     mainText: {
-        paddingRight:20,
+        //paddingRight: 10,
         fontSize: 16,
+        fontWeight: "bold",
     },
 
     itemSummary: {
@@ -96,7 +127,8 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     details: {
-        width: '75%',
+        width: '65%',
+        //height: '100%',
         justifyContent: "space-between",
         paddingHorizontal: 10
     },
@@ -106,12 +138,28 @@ const styles = StyleSheet.create({
         width: '35%'
     },
     circle: {
-        height: 30,
-        width: 30,
-        borderRadius: 15,
+        height: 36,
+        width: 36,
+        borderRadius: 18,
         alignItems: "center",
         justifyContent: "center",
-        overflow: 'hidden'
+        overflow: 'hidden',
+        //backgroundColor:"#fa2f88"
+    },
+    category: {
+        //alignSelf: "flex-end",
+        backgroundColor: "#fa2f88",
+        height:28
+
+        //justifyContent:'flex-end'
+    },
+    categoryText: {
+        color: "white",
+        fontWeight: "bold",
+        padding: 4
+    },
+    lastRow:{
+        justifyContent:'flex-start'
     }
 });
 export default EventItem;

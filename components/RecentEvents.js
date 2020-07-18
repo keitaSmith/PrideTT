@@ -28,7 +28,25 @@ const RecentEvents = props => {
                 renderItem={itemData => (
 
                     <View style={styles.event}>
-                        <CustomIcon style={styles.eventImage} imgUrl={itemData.item.imgUrl}></CustomIcon>
+                        <CustomIcon 
+                        style={styles.eventImage} 
+                        imgUrl={itemData.item.imgUrl}
+                        action={() => {
+                            props.navigation.navigate("Upcoming Events",
+                              {
+                                id: itemData.item.id,
+                                title: itemData.item.title,
+                                start: itemData.item.readableStart,
+                                end: itemData.item.readableEnd,
+                                time:itemData.item.readableEventDetailsDate,
+                                imgUrl: itemData.item.imgUrl,
+                                category: itemData.item.category,
+                                location: itemData.item.location,
+                                content: itemData.item.content,
+                                registrationUrl:itemData.item.registrationUrl
+                              }
+                              )
+                              }}></CustomIcon>
                         <Text style={styles.eventTitle}>{itemData.item.title}</Text>
                     </View>
                 )}

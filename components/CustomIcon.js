@@ -7,10 +7,6 @@ const CustomIcon = props => {
         TouchableCmp = TouchableNativeFeedback;
     }
         return (
-            /*
-            I still need to make this touchable, but for now its just a view that holds 
-            an Image Icon as seen on the home screen
-            */
             <TouchableCmp onPress={props.action} useForeground>
                 <View style={{ ...styles.container, ...props.style }}>
                     <Image

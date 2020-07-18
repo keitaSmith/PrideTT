@@ -11,15 +11,22 @@ export const All_Events_Query = gql`
       start_time
       end_time
       content
+      location
+      category{
+        name
+      }
       image{
         url
       }
+      form
     }
   }
 `;
 
 const AllEvents = props => {
-    const { data, error, loading } = useQuery(All_Events_Query);
+    const { data, error, loading } = useQuery(All_Events_Query,{
+      fetchPolicy:'cache-and-network'
+    });
     const pridettEvents = [];
         if (error) return "error";
         if (loading) return "loading";
@@ -41,8 +48,14 @@ const AllEvents = props => {
             end.setHours( end.getHours() + 1 );
           }
           const now = new Date();
+          let category;
+          if (event.category){
+            category = event.category.name
+          }else{
+            category = null
+          }
           if(end>now){
-            pridettEvents.push(new PrideTTEvent(event.id,event.title,event.content,event.image.url,event.start_time,end,new_date));
+            pridettEvents.push(new PrideTTEvent(event.id,event.title,event.content,category,event.location,event.image.url,event.form,event.start_time,end,new_date));
           }
         });
         return pridettEvents;

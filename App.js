@@ -10,13 +10,8 @@ import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-boost';
 import AppNavigator from './navigation/NavigationContainer';
 const client = new ApolloClient({
   link: new HttpLink({ uri: 'http://186.96.211.174:1337/graphql' }),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache({})
 });
-client.onClearStore(async()=>{
-  initData();
-});
-
-
 export default function App() {
 
 

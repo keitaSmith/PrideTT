@@ -6,6 +6,7 @@ import {
   Dimensions,
   Image,
   ScrollView,
+  StatusBar
 } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
 import CustomIcon from "../components/CustomIcon";
@@ -25,6 +26,7 @@ const Home = (props) => {
   ];
   return (
     <View style={styles.screen}>
+      <StatusBar barStyle = "light-content" hidden = {false} backgroundColor = "rgba(0, 0, 0, 0.5)" translucent = {true}/>
       {/* Header */}
       <View style={styles.header}>
         <Image
@@ -124,7 +126,7 @@ const Home = (props) => {
             </LinearGradient> */}
         <View style={styles.recentEventsContainer}>
           <Text style={styles.recentEventsTitle}>Upcoming Events</Text>
-          <RecentEvents />
+          <RecentEvents navigation={props.navigation}/>
         </View>
       </ScrollView>
     </View>

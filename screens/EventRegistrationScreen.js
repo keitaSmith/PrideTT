@@ -1,18 +1,16 @@
 import React, { useState, useRef } from 'react'
 import { WebView } from 'react-native-webview';
 import { View, TouchableOpacity, Text, StyleSheet,StatusBar } from 'react-native';
-import DonationInfo from '../queries/Donate';
 
-const DonationScreen = props => {
+const EventRegistrationScreen = props => {
+    const {registrationUrl}= props.route.params
     const webviewRef = useRef(null)
-    const donationInfo = DonationInfo();
     const [canGoBack, setCanGoBack] = useState(false)
-    //const [canGoForward, setCanGoForward] = useState(false)
     const [currentUrl, setCurrentUrl] = useState('')
     const backButtonHandler = () => {
         if (webviewRef.current) webviewRef.current.goBack()
     }
-    console.log(donationInfo.donate_link)
+
     //  const frontButtonHandler = () => {
     //     if (webviewRef.current) webviewRef.current.goForward()
     //  }
@@ -29,7 +27,7 @@ const DonationScreen = props => {
             </View>}
             <WebView
                 source={{
-                    uri: donationInfo.donate_link
+                    uri: registrationUrl
                 }}
                 ref={webviewRef}
                 onNavigationStateChange={navState => {
@@ -57,4 +55,4 @@ const styles = StyleSheet.create({
         fontSize: 24
     }
 })
-export default DonationScreen;
+export default EventRegistrationScreen;
