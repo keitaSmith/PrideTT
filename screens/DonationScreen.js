@@ -12,7 +12,7 @@ const DonationScreen = props => {
     const backButtonHandler = () => {
         if (webviewRef.current) webviewRef.current.goBack()
     }
-    console.log(donationInfo.donate_link)
+
     //  const frontButtonHandler = () => {
     //     if (webviewRef.current) webviewRef.current.goForward()
     //  }

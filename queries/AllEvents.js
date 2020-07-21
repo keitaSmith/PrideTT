@@ -5,7 +5,7 @@ import moment from 'moment';
 
 export const All_Events_Query = gql`
 {
-    events{
+    events(sort: "start_time"){
       id
       title
       start_time

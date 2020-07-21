@@ -8,25 +8,29 @@ import {
   ScrollView,
   StatusBar
 } from "react-native";
-import { SliderBox } from "react-native-image-slider-box";
-import CustomIcon from "../components/CustomIcon";
 import RecentEvents from "../components/RecentEvents";
-import { BoxShadow } from "react-native-shadow";
 import { LinearGradient } from "expo-linear-gradient";
 import Colors from "../constants/Colors";
-import PrideTTLogo from "../assets/svgs/PrideTTLogo.svg";
+import TimedSlideshow from '../SlideShow';
 const Home = (props) => {
-  const images = [
-    require("../assets/logos/pridettLogo.png"),
-    require("../assets/sliderImages/slider1.jpg"),
-    require("../assets/sliderImages/slider2.jpg"),
-    require("../assets/sliderImages/slider3.jpg"),
-    require("../assets/sliderImages/slider4.jpg"), //local image
-    //"https://source.unsplash.com/1024x768/?tree", // Network image
-  ];
+  const items = [
+    {
+      uri: require("../assets/sliderImages/slider1.jpg"),
+    },
+    {
+      uri: require("../assets/sliderImages/slider2.jpg"),
+    },
+    {
+      uri: require("../assets/sliderImages/slider3.jpg"),
+    },
+    {
+      uri: require("../assets/sliderImages/slider4.jpg")
+    }
+  ]
+
   return (
     <View style={styles.screen}>
-      <StatusBar barStyle = "light-content" hidden = {false} backgroundColor = "rgba(0, 0, 0, 0.5)" translucent = {true}/>
+      <StatusBar barStyle="light-content" hidden={false} backgroundColor="rgba(0, 0, 0, 0.5)" translucent={true} />
       {/* Header */}
       <View style={styles.header}>
         <Image
@@ -34,18 +38,6 @@ const Home = (props) => {
           style={{ height: 250, width: 250, paddingRight: 30 }}
           resizeMode={"cover"}
         />
-        {/* <PrideTTLogo
-                        height={200}
-                        width={200}
-                    /> */}
-        {/* <SliderBox
-                    images={images}
-                    autoplay
-                    circleLoop
-                    resizeMethod={'resize'}
-                    resizeMode={'cover'}
-                    sliderBoxHeight={250}
-                /> */}
       </View>
       <LinearGradient
         colors={Colors.rainbow}
@@ -55,7 +47,16 @@ const Home = (props) => {
         <View style={styles.border} />
       </LinearGradient>
       <ScrollView>
-        {/* row 1 icons */}
+        <View style={{ height: 200 }}>
+          <TimedSlideshow
+            items={items}
+            footerStyle={{ backgroundColor: 'transparent' }}
+            showProgressBar={false}
+            removeArrow={true}
+            removeClose={true}
+          />
+        </View>
+        {/* row 1 icons
         <View style={styles.icons}>
           <View>
             <BoxShadow setting={hotline}>
@@ -87,7 +88,7 @@ const Home = (props) => {
             </BoxShadow>
           </View>
         </View>
-        {/* row 2 icons*/}
+        {/* row 2 icons
         <View style={styles.icons}>
           <View>
             <BoxShadow setting={wellness}>
@@ -119,14 +120,14 @@ const Home = (props) => {
               <Text style={styles.labels}>Events</Text>
             </BoxShadow>
           </View>
-        </View>
+        </View> */}
 
-        {/* <LinearGradient colors={Colors.rainbow} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.line}>
+        <LinearGradient colors={Colors.rainbow} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
                 <View style={styles.border} />
-            </LinearGradient> */}
+            </LinearGradient>
         <View style={styles.recentEventsContainer}>
           <Text style={styles.recentEventsTitle}>Upcoming Events</Text>
-          <RecentEvents navigation={props.navigation}/>
+          <RecentEvents navigation={props.navigation} />
         </View>
       </ScrollView>
     </View>

@@ -9,6 +9,7 @@ query Event($today:DateTime!){
     events(
       limit:5  
       where:{start_time_gte:$today}
+      sort: "start_time"
       ){
       id
       title
