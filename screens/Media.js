@@ -1,51 +1,142 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import {
-  View,
   StyleSheet,
-  FlatList,
-  Text,
   SafeAreaView,
-  Dimensions,
+  View,
+  FlatList,
+  Platform,
+  ActivityIndicator,
+  TouchableNativeFeedback,
+  TouchableOpacity,
+  Text,
+  RefreshControl,
+  StatusBar,
+  Dimensions
 } from "react-native";
-import PrideTTLogo from "../assets/svgs/PrideTTLogo.svg";
-
+import MediaItem from '../components/MediaItem';
+import { useQuery, NetworkStatus } from '@apollo/client';
+import Featured_Images_Media_Query from '../queries/FeaturedImagesMedia';
+import Colors from '../constants/Colors'
 const Media = (props) => {
+  const [isData, setData] = useState(false)
+  let TouchableCmp = TouchableOpacity;
+  if (Platform.OS === 'android' && Platform.Version >= 21) {
+    TouchableCmp = TouchableNativeFeedback;
+  }
+
+  const { data, error, loading, refetch, networkStatus } = useQuery(Featured_Images_Media_Query, {
+    fetchPolicy: 'cache-and-network',
+    notifyOnNetworkStatusChange: true
+  });
+
+  if (loading && !isData) {
+    return (
+      <View style={styles.error}>
+        <ActivityIndicator size="large" color="#fa2f88" />
+      </View>
+    );
+  }
+  if (error) {
+    return (
+      <View style={styles.error}>
+        <Text style={styles.text}>Something went wrong!</Text>
+        <Text style={styles.text}>Check your internet Connection</Text>
+        <TouchableCmp
+          onPress={() => {
+            if (isData) {
+              setData(false)
+            }
+            refetch()
+          }}
+        >
+          <View style={styles.refreshButton}>
+            <Text style={styles.refreshText}>Refresh</Text>
+          </View>
+        </TouchableCmp>
+      </View>
+    );
+  }
+  const featuredImages = [];
+  if (data) {
+    data.galleries.forEach(gallery => {
+      gallery.images.forEach(image => {
+        const newPrideYear = {
+          id: image.id,
+          title: image.name,
+          imgUrl: { uri: "http://186.96.211.174:1337" + image.url },
+        }
+        featuredImages.push(newPrideYear)
+      });
+      featuredImages.sort((a, b) => { return b.title - a.title });
+    })
+  };
   return (
-    // <View style={styles.container}>
-    //     <PrideTTLogo
-    //     height={0.35*Dimensions.get('window').height}
-    //     width={0.35*Dimensions.get('window').width}
-    //     />
-    // </View>
-    <SafeAreaView style={styles.container}>
-      <Text>Media Screen</Text>
-    </SafeAreaView>
+    < SafeAreaView style={styles.container}>
+      <StatusBar translucent={false} barStyle="dark-content" />
+      <FlatList
+        refreshControl={
+          <RefreshControl
+            refreshing={networkStatus === NetworkStatus.refetch}
+            onRefresh={() => {
+              setData(true)
+              refetch()
+            }}
+            enabled
+            tintColor={Colors.primary}
+            colors={Colors.rainbow}
+          />
+        }
+        data={featuredImages}
+        renderItem={(itemData) => (
+          <View style={styles.mediaItem}>
+            <MediaItem
+              title={itemData.item.title}
+              imgUrl={itemData.item.imgUrl}
+              action={() => {
+                props.navigation.navigate('Events Media', {
+                  year: itemData.item.title
+                })
+              }}
+            />
+          </View>
+        )}
+        keyExtractor={(item) => item.id}
+      />
+    </SafeAreaView >
   );
 };
 
-export const MediaScreenOptions = (navData) => {
-  return {
-    headerTitle: "Media",
-    //header:null
-    // headerRight: () => (
-    //     <HeaderButtons HeaderButtonComponent={HeaderButton}>
-    //         <Item
-    //             title='Cart'
-    //             iconName={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
-    //             onPress={() => {
-    //                 navData.navigation.navigate('Cart')
-    //             }} />
-    //     </HeaderButtons>
-    // )
-  };
-};
 
 const styles = StyleSheet.create({
   container: {
+    marginHorizontal: Dimensions.get('screen').width*0.0266,
     flex: 1,
+
   },
-  event: {
-    marginVertical: 10,
+  error: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  mediaItem: {
+    paddingTop: 10
+  },
+  refreshButton: {
+    margin: 20,
+    backgroundColor: Colors.primary,
+    borderRadius: 5
+  },
+  refreshText: {
+    color: 'white',
+    padding: 10,
+    fontWeight: 'bold',
+    textAlign: "center"
+  },
+  text: {
+    paddingHorizontal: 20,
+    textAlign: "center",
+    fontWeight: "bold",
+    color: Colors.primary
   },
 });
 

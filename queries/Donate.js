@@ -1,5 +1,4 @@
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery,gql } from '@apollo/client';
 import DonationInfo from '../models/donation';
 
 export const Donation_Query = gql`
