@@ -1,11 +1,10 @@
 
 import { gql } from '@apollo/client';
 
-//query Event($today:DateTime!){
-//where:{start_time_gte:$today}
 export default All_Events_Query = gql`
-query Event{
+query Event($today:DateTime!){
     events(
+      where:{start_time_gte:$today}
       sort: "start_time" 
       ){
       id

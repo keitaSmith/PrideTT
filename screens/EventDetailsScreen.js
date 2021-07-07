@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, StatusBar, Platform, SafeAreaView, TouchableNativeFeedback, TouchableOpacity,Dimensions } from 'react-native';
+import Markdown from 'react-native-markdown-display';
+import { View, Text, Image, StyleSheet, ScrollView, StatusBar, Platform, SafeAreaView, TouchableNativeFeedback, TouchableOpacity,Dimensions,PureComponent } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useMutation } from '@apollo/client';
 import { ADD_OR_REMOVE_EVENT_FROM_FAVORITE } from '../queries/AllEvents';
 import Colors from '../constants/Colors';
 const EventDetailsScreen = props => {
+
+            
     const { id, title, end, time, location, content, imgUrl, category, registrationUrl, favorite } = props.route.params
     const [fav, setFav] = useState(favorite);
     let TouchableCmp = TouchableOpacity;
@@ -27,6 +30,7 @@ const EventDetailsScreen = props => {
     }else{
         iconSize=28
     }
+    
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <MyStatusBar barStyle="dark-content" backgroundColor="white" translucent={false} />
@@ -71,11 +75,11 @@ const EventDetailsScreen = props => {
                         {/*Description*/}
                         <View style={styles.contentContainer}>
                             <Text style={styles.contentTitle}>About</Text>
-                            {content && <Text style={styles.content}>{content}</Text>}
+                            {(content || content!=="") && <Markdown style={styles.content}>{content}</Markdown>}
                         </View>
                         {registrationUrl != "" && registrationUrl != null && <TouchableCmp
                             onPress={() => {
-                                props.navigation.navigate('Event Registration',
+                                this.props.navigation.navigate('Event Registration',
                                     {
                                         registrationUrl: registrationUrl
                                     })

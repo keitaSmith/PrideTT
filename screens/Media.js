@@ -17,6 +17,7 @@ import MediaItem from '../components/MediaItem';
 import { useQuery, NetworkStatus } from '@apollo/client';
 import Featured_Images_Media_Query from '../queries/FeaturedImagesMedia';
 import Colors from '../constants/Colors'
+import db from '../constants/DBUrl'
 const Media = (props) => {
   const [isData, setData] = useState(false)
   let TouchableCmp = TouchableOpacity;
@@ -63,7 +64,7 @@ const Media = (props) => {
         const newPrideYear = {
           id: image.id,
           title: image.name,
-          imgUrl: { uri: "http://186.96.211.174:1337" + image.url },
+          imgUrl: { uri: db.url + image.url },
         }
         featuredImages.push(newPrideYear)
       });
@@ -74,6 +75,7 @@ const Media = (props) => {
     < SafeAreaView style={styles.container}>
       <StatusBar translucent={false} barStyle="dark-content" />
       <FlatList
+      style={styles.list}
         refreshControl={
           <RefreshControl
             refreshing={networkStatus === NetworkStatus.refetch}
@@ -109,7 +111,7 @@ const Media = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: Dimensions.get('screen').width*0.0266,
+    
     flex: 1,
 
   },
@@ -119,7 +121,9 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   mediaItem: {
-    paddingTop: 10
+    width:'100%',
+    paddingHorizontal: Dimensions.get('screen').width*0.0266,
+    paddingVertical:5
   },
   refreshButton: {
     margin: 20,
@@ -138,6 +142,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: Colors.primary
   },
+  list:{
+    width:'100%'
+  }
 });
 
 export default Media;

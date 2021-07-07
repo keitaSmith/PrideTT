@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Dimensions, Text, Image, StyleSheet, TouchableNativeFeedback, TouchableOpacity, Platform } from 'react-native';
 import Colors from '../constants/Colors';
+import db from '../constants/DBUrl';
 const GalleryItem = props => {
     let TouchableCmp = TouchableOpacity;
     if (Platform.OS === 'android' && Platform.Version >= 21) {
@@ -10,7 +11,7 @@ const GalleryItem = props => {
         <TouchableCmp onPress={props.action}>
             <View style={styles.galleryItemContainer}>
                 <View style={styles.imageContainer}>
-                    <Image style={styles.image} source={{ uri: 'http://186.96.211.174:1337' + props.imgSrc }} />
+                    <Image style={styles.image} source={{ uri: db.url + props.imgSrc }} />
                 </View>
                 <View>
                     <Text numberOfLines={2} ellipsizeMode="tail" style={styles.title}>{props.galleryTitle}</Text>

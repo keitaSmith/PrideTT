@@ -5,6 +5,9 @@ import { persistCache } from 'apollo-cache-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 import AppNavigator from './navigation/NavigationContainer';
 import { FAVORTIE_EVENT_FRAGMENT } from './queries/AllEvents';
+import db from './constants/DBUrl'
+
+
 const cache = new InMemoryCache({
   typePolicies: {
     Event: {
@@ -28,7 +31,7 @@ export default function App() {
       trigger: 'background'
     }).then(() => {
       setClient(new ApolloClient({
-        uri: 'http://186.96.211.174:1337/graphql',
+        uri: db.url+'/graphql',
         cache,
         resolvers: {
           Mutation: {

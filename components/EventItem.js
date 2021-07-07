@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useMutation } from '@apollo/client'
 import { ADD_OR_REMOVE_EVENT_FROM_FAVORITE } from '../queries/AllEvents';
 const EventItem = props => {
-
+    //console.log(props.imgUrl);
     let TouchableCmp = TouchableOpacity;
     if (Platform.OS === 'android' && Platform.Version >= 21) {
         TouchableCmp = TouchableNativeFeedback;

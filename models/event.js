@@ -1,4 +1,5 @@
 import moment from 'moment';
+import db from '../constants/DBUrl';
 class PrideTTEvent {
   constructor(id, title, content, category, location, favorite, imgUrl, registrationUrl, start_time, end_time, new_date) {
     this.id = id;
@@ -7,7 +8,7 @@ class PrideTTEvent {
     this.category = category;
     this.location = location;
     this.favorite = favorite;
-    this.imgUrl = { uri: 'http://186.96.211.174:1337' + imgUrl };
+    this.imgUrl = { uri: db.url + imgUrl };
     this.registrationUrl = registrationUrl
     this.start_time = new Date(start_time);
     this.end_time = new Date(end_time);

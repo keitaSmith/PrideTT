@@ -24,6 +24,7 @@ const DonationScreen = props => {
     //  const frontButtonHandler = () => {
     //     if (webviewRef.current) webviewRef.current.goForward()
     //  }
+    console.log(donationInfo.donate_link);
     return (
         <SafeAreaView style={styles.flexContainer}>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="rgba(0, 0, 0, 0.5)" translucent={false} />

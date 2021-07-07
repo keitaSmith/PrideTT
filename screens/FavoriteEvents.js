@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useQuery } from '@apollo/client';
 import {
     View,
@@ -15,10 +15,13 @@ import EventItem from "../components/EventItem";
 import FAVORITE_EVENTS_QUERY from "../queries/AllEvents"
 
 const FavoriteEvents = (props) => {
+    const today = useRef(new Date()).current;
     const { data, error, loading } = useQuery(FAVORITE_EVENTS_QUERY, {
-        fetchPolicy: 'cache-only',
+        fetchPolicy: 'cache-and-network',
+        variables: { today: today },
         notifyOnNetworkStatusChange: true
     });
+    console.log(loading);
     const pridettEvents = [];
     if (error) {
         return (
@@ -44,7 +47,7 @@ const FavoriteEvents = (props) => {
     }
     data.events.forEach(event => {
         let end;
-        let new_date
+        let new_date;
         if (pridettEvents.length === 0) {
             new_date = true;
         } else if (pridettEvents[pridettEvents.length - 1].readableDate !== moment(event.start_time).format('MMMM Do YYYY')) {
@@ -67,8 +70,10 @@ const FavoriteEvents = (props) => {
         }
         if ((event.favorite == true)) {
             pridettEvents.push(new PrideTTEvent(event.id, event.title, event.content, category, event.location, event.favorite, event.image.url, event.form, event.start_time, end, new_date));
+            
         }
     });
+    
     if (pridettEvents.length == 0) {
         return (
             <View style={styles.container}>

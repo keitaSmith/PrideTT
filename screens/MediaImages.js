@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import ImageView from "react-native-image-viewing";
 import ImageItem from '../components/ImageItem';
+import db from '../constants/DBUrl';
 const MediaImages = (props) => {
     const [showModal, setShowModal] = useState(false);
     const [imageIndex, setImageIndex] = useState(0);
@@ -22,7 +23,7 @@ const MediaImages = (props) => {
     images.forEach(image => {
         imageList.push({
             id: imgId,
-            uri: 'http://186.96.211.174:1337' + image.url
+            uri: db.url + image.url
         })
         imgId += 1;
     });

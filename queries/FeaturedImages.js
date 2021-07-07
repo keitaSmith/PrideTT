@@ -10,7 +10,8 @@ export const Featured_Images_Query = gql`
   }
 `;
 
-const FeaturedImages = props => {
+import db from '../constants/DBUrl'
+const FeaturedImages = () => {
     const { data, error, loading } = useQuery(Featured_Images_Query, {
       fetchPolicy: 'network-only',
     });
@@ -19,7 +20,7 @@ const FeaturedImages = props => {
     const featuredImages=[];
     data.galleries.forEach(gallery => {
       gallery.images.forEach(image=>{
-        const imageUrl={uri:"http://186.96.211.174:1337"+image.url};
+        const imageUrl={uri:db.url+image.url};
         featuredImages.push(imageUrl)
       });
     })

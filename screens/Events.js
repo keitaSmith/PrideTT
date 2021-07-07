@@ -86,6 +86,8 @@ const Events = (props) => {
       }
       pridettEvents.push(new PrideTTEvent(event.id, event.title, event.content, category, event.location, event.favorite, event.image.url, event.form, event.start_time, end, new_date));
     });
+    //console.log(pridettEvents);
+    //console.log(JSON.stringify(pridettEvents));
   }
   const MyStatusBar = ({ backgroundColor, ...props }) => (
     <View style={[styles.statusBar, { backgroundColor }]}>

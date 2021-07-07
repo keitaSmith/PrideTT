@@ -12,12 +12,14 @@ export const Donation_Query = gql`
 `;
 
 const Donation = props => {
-    const { data, error, loading } = useQuery(Donation_Query);
-    
+    const { data, error, loading } = useQuery(Donation_Query,{
+    fetchPolicy: 'network-only',
+    });
     if (error) return "error";
     if (loading) return "loading";
 
-    const donationInfo =new DonationInfo(data.block.donate_link, data.block.hero_heading, data.block.hero_description);     
+    const donationInfo =new DonationInfo(data.block.donate_link, data.block.hero_heading, data.block.hero_description);
+    
     return donationInfo;
 
 }

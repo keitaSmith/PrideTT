@@ -2,7 +2,7 @@
   "expo": {
     "packagerOpts": {
       "config": "metro.config.js",
-    "sourceExts": [
+      "sourceExts": [
         "js",
         "jsx",
         "svg",
@@ -14,9 +14,9 @@
     "slug": "pridett",
     "platforms": [
       "ios",
-      "android"     
+      "android"
     ],
-    "version": "1.0.0",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -32,16 +32,18 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier":"com.pridett.pridett",
-      "buildNumber":"1.0.0"
+      "bundleIdentifier": "com.pridett.pridett",
+      "buildNumber": "1.0.3"
     },
-    "android":{
-      "package":"com.pridett.pridett",
-      "versionCode":1,
-      "adaptiveIcon":{
+    "android": {
+      "package": "com.pridett.pridett",
+      "versionCode": 4,
+      "adaptiveIcon": {
         "backgroundColor": "#ffffff",
-        "foregroundImage":"./assets/icon-adaptive.png"
-      }
-    }
+        "foregroundImage": "./assets/icon-adaptive.png"
+      },
+      "permissions": []
+    },
+    "description": ""
   }
 }

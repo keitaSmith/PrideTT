@@ -16,6 +16,7 @@ import Colors from '../constants/Colors';
 import EventMediaItem from '../components/EventMediaItem';
 import { useQuery, NetworkStatus } from '@apollo/client';
 import Events_Media_Query from '../queries/EventsMedia';
+import db from '../constants/DBUrl'
 const MediaByEvent = (props) => {
   const [isData, setData] = useState(false);
   let TouchableCmp = TouchableOpacity;
@@ -64,7 +65,7 @@ const MediaByEvent = (props) => {
       const newEventMedia = {
         id: event.id,
         title: event.title,
-        imgUrl: { uri: "http://186.96.211.174:1337" + event.image.url },
+        imgUrl: { uri: db.url + event.image.url },
         content: event.content,
         numGalleries: event.galleries.length,
         numVideos:event.videos.length
@@ -134,9 +135,11 @@ const MediaByEvent = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: Dimensions.get('screen').width*0.0266,
+    
   },
   mediaItem: {
+    paddingHorizontal: Dimensions.get('screen').width*0.0266,
+    paddingVertical:5,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
