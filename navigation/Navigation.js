@@ -11,6 +11,7 @@ import Home from "../screens/Home";
 import Events from "../screens/Events";
 import Media from "../screens/Media";
 import MediaByEvent from '../screens/MediaByEvent';
+import DonationMethodsScreen from "../screens/DonationMethodsScreen";
 import DonationScreen from "../screens/DonationScreen";
 import EventDetailsScreen from '../screens/EventDetailsScreen';
 import EventRegistrationScreen from '../screens/EventRegistrationScreen';
@@ -27,6 +28,8 @@ const EventsStackNavigator = createStackNavigator();
 const FavoriteEventsStackNavigator = createStackNavigator();
 const MediaStackNavigator = createStackNavigator();
 const MediaImagesStackNavigator = createStackNavigator();
+const DonationMethodsStackNavigator = createStackNavigator();
+const FundMeTTStackNavigator = createStackNavigator();
 export const MediaNavigator = props => {
   return (
     <MediaStackNavigator.Navigator
@@ -37,6 +40,7 @@ export const MediaNavigator = props => {
         }
       }}
     >
+
       <MediaStackNavigator.Screen
         name="Media"
         component={Media}
@@ -44,6 +48,8 @@ export const MediaNavigator = props => {
           headerShown: false,
         }}
       />
+
+     
       <MediaStackNavigator.Screen
         name="Events Media"
         component={MediaByEvent}
@@ -104,7 +110,11 @@ export const MediaNavigator = props => {
       /> */}
     </MediaStackNavigator.Navigator>
   )
+
+  
 }
+
+
 export const MediaFilesNavigator = props => {
   return (
     <MediaContext.Provider value={props.route.params.id}>
@@ -264,6 +274,40 @@ export const EventsNavigator = (props) => {
     </EventsStackNavigator.Navigator>
   );
 };
+
+export const DonationMethodsNavigator = (props) => {
+  return (
+    <DonationMethodsStackNavigator.Navigator>
+      <DonationMethodsStackNavigator.Screen
+        name="Donation Methods"
+        component={DonationMethodsScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <DonationMethodsStackNavigator.Screen
+        name="FundMeTT"
+        component={DonationScreen}
+        options={{
+          headerShown: true,
+          headerTransparent: false,
+          headerTitle: 'Donate',
+          headerBackTitleVisible: false,
+          headerBackTitleStyle: {
+            color: 'white'
+          },
+          headerTintColor: 'black',
+
+        }}
+      />
+  
+    
+    </DonationMethodsStackNavigator.Navigator>
+  );
+};
+
+
 export const FavoriteEventsNavigator = (props) => {
   return (
     <FavoriteEventsStackNavigator.Navigator
@@ -301,6 +345,8 @@ export const FavoriteEventsNavigator = (props) => {
         }
         }
       />
+
+      
     </FavoriteEventsStackNavigator.Navigator>
   );
 };
@@ -358,7 +404,7 @@ export const HomeTabNavigator = (props) => {
       <Tab.Screen name="Events" component={EventsNavigator} />
       <Tab.Screen name="Saved Events" component={FavoriteEventsNavigator} />
       <Tab.Screen name="Media" component={MediaNavigator} />
-      <Tab.Screen name="Contribute" component={DonationScreen} />
+      <Tab.Screen name="Contribute" component={DonationMethodsNavigator} />
     </Tab.Navigator>
   );
 };
